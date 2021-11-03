@@ -38,6 +38,20 @@ export class DialogBox {
         resolve(result);
       });
     });
+  }
 
+  public static atencion(mensaje: string, titulo: string): Promise<SweetAlertResult> {
+    return new Promise<SweetAlertResult>((resolve) => {
+      Swal.fire({
+        title: titulo,
+        text: mensaje,
+        icon: 'warning',
+        confirmButtonText:
+          '<strong><i class="fa fa-thumbs-up fa-fw"></i> OK</strong>',
+        confirmButtonColor: "#5360a9",
+      }).then((result) => {
+        resolve(result);
+      });
+    });
   }
 }

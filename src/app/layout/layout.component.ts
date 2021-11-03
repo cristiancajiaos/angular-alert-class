@@ -159,8 +159,8 @@ export class LayoutComponent implements OnInit {
 
       if (resolve.isConfirmed) {
         this.toastr.success(
-          `Confirmación: Se presionó el botón OK`,
-          "Realizado"
+          `Se presionó el botón OK`,
+          "Cuadro de diálogo de Confirmación"
         );
       } else if (resolve.isDismissed) {
         if (resolve.dismiss) {
@@ -172,8 +172,8 @@ export class LayoutComponent implements OnInit {
         }
 
         this.toastr.success(
-          `Confirmación: Se hizo la acción cancelar por ${dismissMethod}.`,
-          "Realizado"
+          `Se hizo la acción cancelar por ${dismissMethod}.`,
+          "Cuadro de diálogo de Confirmación"
         );
       }
     }).catch((reject) => {
@@ -188,8 +188,8 @@ export class LayoutComponent implements OnInit {
 
         if (resolve.isConfirmed) {
           this.toastr.success(
-            `Confirmación: Se presionó el botón OK`,
-            "Realizado"
+            `Se presionó el botón OK`,
+            "Cuadro de diálogo de Error"
           );
         } else if (resolve.isDismissed) {
           if (resolve.dismiss) {
@@ -201,13 +201,43 @@ export class LayoutComponent implements OnInit {
           }
 
           this.toastr.success(
-            `Confirmación: Se hizo la acción cancelar por ${dismissMethod}.`,
-            "Realizado"
+            `Se hizo la acción cancelar por ${dismissMethod}.`,
+            "Cuadro de diálogo de Error"
           );
         }
       })
       .catch((reject) => {
         console.log(reject)
+      });
+  }
+
+  public openAtencion(): void {
+    DialogBox.atencion('Este es un cuadro de diálogo de atención', 'Atención')
+      .then((resolve) => {
+        let dismissMethod;
+
+        if (resolve.isConfirmed) {
+          this.toastr.success(
+            `Se presionó el botón OK`,
+            "Cuadro de diálogo de Atención"
+          );
+        } else if (resolve.isDismissed) {
+          if (resolve.dismiss) {
+            if (resolve.dismiss.toString() === "cancel") {
+              dismissMethod = "el botón cancel";
+            } else if (resolve.dismiss.toString() === "backdrop") {
+              dismissMethod = "backdrop";
+            }
+          }
+
+          this.toastr.success(
+            `Se hizo la acción cancelar por ${dismissMethod}.`,
+            "Cuadro de diálogo de Atención"
+          );
+        }
+      })
+      .catch((reject) => {
+        console.log(reject);
       });
   }
 
