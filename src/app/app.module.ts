@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -15,7 +16,9 @@ import { LayoutComponent } from './layout/layout.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

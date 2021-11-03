@@ -1,3 +1,44 @@
-<button class="btn btn-primary" (click)="openDialog()">
-  Abrir cuadro de diálogo
-</button>
+<div class="row align-items-center">
+  <div class="col-12 col-lg-4">
+    <div class="form-group">
+      <label for="dialogBoxIcon">Ícono</label>
+      <select class="form-control" id="dialogBoxIcon" name="dialogBoxIcon" [(ngModel)]="dialogBoxIcon">
+        <option *ngFor="let icon of icons" [value]="icon">
+          {{icon}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="col-12 col-lg-4 offset-lg-4">
+    <div class="d-grid">
+      <button class="btn btn-danger" (click)="setDefault()">
+        <i class="fa fa-undo fa-fw"></i> Resetear valor por defecto
+      </button>
+    </div>
+  </div>
+</div>
+<hr />
+<div class="row">
+  <div class="col-12 col-lg-4">
+    <div class="d-grid">
+      <button class="btn btn-primary btn-block" (click)="openDialogOneButton()">
+        <i class="fas fa-external-link-square-alt fa-fw"></i> Abrir cuadro de diálogo de 1 botón
+      </button>
+    </div>
+  </div>
+  <div class="col-12 col-lg-4">
+    <div class="d-grid">
+      <button class="btn btn-primary btn-block" (click)="openDialogTwoButtons()">
+        <i class="fas fa-external-link-square-alt fa-fw"></i> Abrir cuadro de diálogo de 2 botones
+      </button>
+    </div>
+  </div>
+  <div class="col-12 col-lg-4">
+    <div class="d-grid">
+      <button class="btn btn-primary btn-block" (click)="openDialogThreeButtons()">
+        <i class="fas fa-external-link-square-alt fa-fw"></i> Abrir cuadro de diálogo de 3 botones
+      </button>
+    </div>
+
+  </div>
+</div>
