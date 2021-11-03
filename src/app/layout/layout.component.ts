@@ -24,31 +24,6 @@ export class LayoutComponent implements OnInit {
     this.dialogBoxIcon = this.icons[0];
   }
 
-  public openConfirmation(): void {
-    DialogBox.confirmacion('foo', 'foo')
-      .then((resolve) => {
-        console.log(resolve);
-        let dismissMethod;
-
-        if (resolve.isConfirmed) {
-          this.toastr.success(`Confirmación: Se presionó el botón OK`, "Realizado");
-        } else if (resolve.isDismissed) {
-          if (resolve.dismiss) {
-            if (resolve.dismiss.toString() === 'cancel') {
-              dismissMethod = 'el botón cancel';
-            } else if (resolve.dismiss.toString() === 'backdrop') {
-              dismissMethod = 'backdrop';
-            }
-          }
-
-          this.toastr.success(
-            `Confirmación: Se hizo la acción cancelar por ${dismissMethod}.`,
-            "Realizado"
-          );
-        }
-      });
-  }
-
   public openDialogOneButton(): void {
     Swal.fire({
       title: "Un botón",
@@ -174,6 +149,65 @@ export class LayoutComponent implements OnInit {
       })
       .catch((reject) => {
         console.log(reject);
+      });
+  }
+
+  public openConfirmation(): void {
+    DialogBox.confirmacion("foo", "foo").then((resolve) => {
+      console.log(resolve);
+      let dismissMethod;
+
+      if (resolve.isConfirmed) {
+        this.toastr.success(
+          `Confirmación: Se presionó el botón OK`,
+          "Realizado"
+        );
+      } else if (resolve.isDismissed) {
+        if (resolve.dismiss) {
+          if (resolve.dismiss.toString() === "cancel") {
+            dismissMethod = "el botón cancel";
+          } else if (resolve.dismiss.toString() === "backdrop") {
+            dismissMethod = "backdrop";
+          }
+        }
+
+        this.toastr.success(
+          `Confirmación: Se hizo la acción cancelar por ${dismissMethod}.`,
+          "Realizado"
+        );
+      }
+    }).catch((reject) => {
+      console.log(reject);
+    });
+  }
+
+  public openError(): void {
+    DialogBox.error('Error genérico', 'Error')
+      .then((resolve) => {
+        let dismissMethod;
+
+        if (resolve.isConfirmed) {
+          this.toastr.success(
+            `Confirmación: Se presionó el botón OK`,
+            "Realizado"
+          );
+        } else if (resolve.isDismissed) {
+          if (resolve.dismiss) {
+            if (resolve.dismiss.toString() === "cancel") {
+              dismissMethod = "el botón cancel";
+            } else if (resolve.dismiss.toString() === "backdrop") {
+              dismissMethod = "backdrop";
+            }
+          }
+
+          this.toastr.success(
+            `Confirmación: Se hizo la acción cancelar por ${dismissMethod}.`,
+            "Realizado"
+          );
+        }
+      })
+      .catch((reject) => {
+        console.log(reject)
       });
   }
 
