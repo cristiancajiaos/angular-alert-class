@@ -1,6 +1,7 @@
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
+import { DialogBox } from '../shared/classes/dialog-box';
 
 @Component({
   selector: "app-layout",
@@ -23,28 +24,28 @@ export class LayoutComponent implements OnInit {
     this.dialogBoxIcon = this.icons[0];
   }
 
-  openDialog(): void {
-    Swal.fire("Hola, mundo!", "Hello!")
+  public openConfirmation(): void {
+    DialogBox.confirmacion('foo', 'foo')
       .then((resolve) => {
+        console.log(resolve);
         let dismissMethod;
 
         if (resolve.isConfirmed) {
-          this.toastr.success(`Un botón: Se presionó el botón OK`, "Realizado");
+          this.toastr.success(`Confirmación: Se presionó el botón OK`, "Realizado");
         } else if (resolve.isDismissed) {
           if (resolve.dismiss) {
-            if (resolve.dismiss.toString() == "backdrop") {
-              dismissMethod = "backdrop";
+            if (resolve.dismiss.toString() === 'cancel') {
+              dismissMethod = 'el botón cancel';
+            } else if (resolve.dismiss.toString() === 'backdrop') {
+              dismissMethod = 'backdrop';
             }
           }
 
           this.toastr.success(
-            `Un botón: Se hizo la acción cancelar por ${dismissMethod}.`,
+            `Confirmación: Se hizo la acción cancelar por ${dismissMethod}.`,
             "Realizado"
           );
         }
-      })
-      .catch((reject) => {
-        console.log(reject);
       });
   }
 
