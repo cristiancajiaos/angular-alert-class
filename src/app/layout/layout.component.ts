@@ -241,6 +241,42 @@ export class LayoutComponent implements OnInit {
       });
   }
 
+  public openAcciones(): void {
+    DialogBox.acciones('Este es un cuadro de diálogo de acciones', 'Acciones')
+      .then((resolve) => {
+        console.log(resolve);
+        let dismissMethod;
+
+        if (resolve.isConfirmed) {
+          this.toastr.success(
+            `Se presionó el botón Continuar`,
+            "Cuadro de diálogo de Atención"
+          );
+        } else if (resolve.isDenied) {
+          this.toastr.success(
+            `Se presionó el botón OK`,
+            "Cuadro de diálogo de Atención"
+          );
+        } else if (resolve.isDismissed) {
+          if (resolve.dismiss) {
+            if (resolve.dismiss.toString() === "cancel") {
+              dismissMethod = "el botón cancel";
+            } else if (resolve.dismiss.toString() === "backdrop") {
+              dismissMethod = "backdrop";
+            }
+          }
+
+          this.toastr.success(
+            `Se hizo la acción cancelar por ${dismissMethod}.`,
+            "Cuadro de diálogo de Atención"
+          );
+        }
+       })
+      .catch((reject) => {
+        console.log(reject);
+      });
+  }
+
   public setDefault(): void {
     this.dialogBoxIcon = this.icons[0];
   }
