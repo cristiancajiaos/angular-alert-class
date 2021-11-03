@@ -152,6 +152,35 @@ export class LayoutComponent implements OnInit {
       });
   }
 
+  public openExito(): void {
+    DialogBox.exito('Acción exitosa', 'Éxito')
+      .then((resolve) => {
+        console.log(resolve);
+        let dismissMethod;
+
+        if (resolve.isConfirmed) {
+          this.toastr.success(
+            `Se presionó el botón OK`,
+            "Cuadro de diálogo de Éxito"
+          );
+        } else if (resolve.isDismissed) {
+          if (resolve.dismiss) {
+            if (resolve.dismiss.toString() === "backdrop") {
+              dismissMethod = "backdrop";
+            }
+          }
+
+          this.toastr.success(
+            `Se hizo la acción cancelar por ${dismissMethod}.`,
+            "Cuadro de diálogo de Éxito"
+          );
+        }
+      })
+      .catch((reject) => {
+        console.log(reject);
+      });
+  }
+
   public openConfirmation(): void {
     DialogBox.confirmacion("foo", "foo").then((resolve) => {
       console.log(resolve);

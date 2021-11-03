@@ -1,6 +1,19 @@
 import Swal, { SweetAlertResult } from 'sweetalert2';
 
 export class DialogBox {
+  public static exito(mensaje: string, titulo: string): Promise<SweetAlertResult> {
+    return new Promise<SweetAlertResult>((resolve) => {
+      Swal.fire({
+        title: titulo,
+        text: mensaje,
+        icon: 'success',
+        scrollbarPadding: false,
+      }).then((result) => {
+        resolve(result);
+      });
+    });
+  }
+
   public static confirmacion(mensaje: string, titulo: string, textoConfirmar?: string, textoCancelar?: string): Promise<SweetAlertResult> {
     return new Promise<SweetAlertResult>((resolve) => {
       Swal.fire({
