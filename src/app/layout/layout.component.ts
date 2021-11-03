@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-layout',
@@ -12,4 +13,9 @@ export class LayoutComponent implements OnInit {
   ngOnInit() {
   }
 
+  openDialog(): void {
+    Swal.fire('Hola, mundo!', 'Hello!')
+      .then((resolve) => { console.log(resolve); })
+      .catch((reject) => { console.log(reject); })
+  }
 }
